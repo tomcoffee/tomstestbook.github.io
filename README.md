@@ -1,11 +1,9 @@
-# website
-website demo
 Welcome to **tom's testbook**
 =================
 
 ( ´ー`)フゥー．．．
 
-**ALWAYS REMIX PROJECT** before editing. Click `Show` in the header to see your app live. Showing 'next to the code' often times do not work if you are calling out elements and what-not, since it'll be inside an iframe built by glitch. Simply show in new window.
+Planned to be published on Github Pages
 
 Server side code will mainly be built upon node.js.
 [for more node samples](https://runkit.com/tomkatoh)
