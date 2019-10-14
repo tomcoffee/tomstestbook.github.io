@@ -1,9 +1,91 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>タイトル</title>
+<meta name="author" content="Tomoya">
+<meta name="description" content="Sample for Stripe testing">
+<meta name="keywords" content="Stripe,Tom,Sample,Test,node.js,html,css,test,Stripe Connect,Stripe Billing,Stripe Checkout,Elements+Stripe.js">
+<meta name="referrer" content="unsafe-url">
+<meta name="theme-color" content="#008080">
+<meta name="format-detection" content="telephone=no,email=no,address=no">
+<meta name="google" content="notranslate">
+<meta http-equiv="Cache-Control" content="no-store">
+<title>toms testbook</title>
 </head>
 <body>
-ここに本文
+Please remix before editing.
+  <h1>
+    Tom's Test Book
+  </h1>
+  <h2>
+  <a href="http://pokemondb.net/pokedex/squirtle"><img src="https://img.pokemondb.net/sprites/yellow/normal/squirtle-color.png" alt="Squirtle" class="img1"></a>
+  <form action="your-server-side-code" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_ShgrPM4DziIKDOxfJwVm2rCq"
+    data-amount="1000"
+    data-name="TOM COFFEE"
+    data-description="create token"
+    data-image="https://img.pokemondb.net/sprites/yellow/normal/squirtle-color.png"
+    data-locale="auto"
+    data-panel-label="Squirtle"
+    data-label="1 Squirtle"
+    data-zip-code="false"
+    data-currency="jpy">
+  </script>
+</form>
+  </h2>
+  <h3>
+    <a href="http://pokemondb.net/pokedex/bulbasaur"><img src="https://img.pokemondb.net/sprites/red-blue/normal/bulbasaur.png" alt="Bulbasaur" class="img1"></a>
+<!-- Load Stripe.js on your website. -->
+<script src="https://js.stripe.com/v3"></script>
+
+<!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
+<button
+  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+  id="checkout-button-sku_FzR4JUatDOKrb9"
+  role="link"
+>
+  1 Bulbasaur
+</button>
+
+<div id="error-message"></div>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_ShgrPM4DziIKDOxfJwVm2rCq');
+
+  var checkoutButton = document.getElementById('checkout-button-sku_FzR4JUatDOKrb9');
+  checkoutButton.addEventListener('click', function () {
+    // When the customer clicks on the button, redirect
+    // them to Checkout.
+    stripe.redirectToCheckout({
+      items: [{sku: 'sku_FzR4JUatDOKrb9', quantity: 1}],
+
+      // Do not rely on the redirect to the successUrl for fulfilling
+      // purchases, customers may not always reach the success_url after
+      // a successful payment.
+      // Instead use one of the strategies described in
+      // https://stripe.com/docs/payments/checkout/fulfillment
+      successUrl: window.location.protocol + '//adish.co.jp/success',
+      cancelUrl: window.location.protocol + '//adish.co.jp/canceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer.
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+    </script> </h3>
+  <h4>
+    
+  </h4>
 </body>
+  <style type="text/css">
+@import url(style.css);
+</style>
 </html>
