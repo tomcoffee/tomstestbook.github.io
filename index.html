@@ -70,6 +70,9 @@ Please remix before editing.
       // https://stripe.com/docs/payments/checkout/fulfillment
       successUrl: window.location.protocol + '//adish.co.jp/success',
       cancelUrl: window.location.protocol + '//adish.co.jp/canceled',
+      shippingAddressCollection: {
+    allowedCountries: ['JP'],
+      }
     })
     .then(function (result) {
       if (result.error) {
