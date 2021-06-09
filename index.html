@@ -126,6 +126,7 @@ live mode checkout
        */
       successUrl: window.location.protocol + '//stripetest.com/success',
       cancelUrl: window.location.protocol + '//stripetest.com/canceled',
+      shippingAddressCollection: { allowedCountries: ['JP'], },
     })
     .then(function (result) {
       if (result.error) {
