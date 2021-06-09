@@ -89,16 +89,17 @@ Please remix before editing.
 live mode checkout
   </h4>
   <h5>
-    <!-- Load Stripe.js on your website. -->
+<!-- Load Stripe.js on your website. -->
 <script src="https://js.stripe.com/v3"></script>
 
 <!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
 <button
-  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-  id="checkout-button-sku_G0ty4WJjBWb5hM"
+  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em;cursor:pointer"
+  id="checkout-button-price_1J0IjXAzkrNMQlM3GxEc3qlB"
   role="link"
+  type="button"
 >
- live mode ethiopia
+  Checkout
 </button>
 
 <div id="error-message"></div>
@@ -107,25 +108,31 @@ live mode checkout
 (function() {
   var stripe = Stripe('pk_live_lAsTTWUyo94cmWJZV9oxiiIx');
 
-  var checkoutButton = document.getElementById('checkout-button-sku_G0ty4WJjBWb5hM');
+  var checkoutButton = document.getElementById('checkout-button-price_1J0IjXAzkrNMQlM3GxEc3qlB');
   checkoutButton.addEventListener('click', function () {
-    // When the customer clicks on the button, redirect
-    // them to Checkout.
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
     stripe.redirectToCheckout({
-      items: [{sku: 'sku_G0ty4WJjBWb5hM', quantity: 1}],
-
-      // Do not rely on the redirect to the successUrl for fulfilling
-      // purchases, customers may not always reach the success_url after
-      // a successful payment.
-      // Instead use one of the strategies described in
-      // https://stripe.com/docs/payments/checkout/fulfillment
-      successUrl: window.location.protocol + '//adish.co.jp/success',
-      cancelUrl: window.location.protocol + '//adish.co.jp/canceled',
+      lineItems: [{price: 'price_1J0IjXAzkrNMQlM3GxEc3qlB', quantity: 1}],
+      mode: 'subscription',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: window.location.protocol + '//stripetest.com/success',
+      cancelUrl: window.location.protocol + '//stripetest.com/canceled',
     })
     .then(function (result) {
       if (result.error) {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer.
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
         var displayError = document.getElementById('error-message');
         displayError.textContent = result.error.message;
       }
